@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.db import models
-from django_filters import DateFromToRangeFilter
+from django_filters import DateFromToRangeFilter, NumberFilter
 from django_filters.rest_framework import FilterSet
 
 
@@ -31,8 +31,10 @@ class Advertisement(models.Model):
         auto_now=True
     )
 
+
 class AdvertisementFilter(FilterSet):
-    date = DateFromToRangeFilter()
+    created_at = DateFromToRangeFilter()
+    creator = NumberFilter(field_name='creator')
     class Meta:
         model = Advertisement
-        fields = ['created_at']
+        fields = ['created_at', 'creator',]
